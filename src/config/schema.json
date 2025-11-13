@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KafkaIntegrationConfig",
+  "description": "Configuration schema for the Kafka Integration Scraper.",
+  "type": "object",
+  "properties": {
+    "defaultDatasetId": {
+      "type": "string",
+      "description": "Identifier for the dataset containing records to process."
+    },
+    "kafkaConfig": {
+      "type": "object",
+      "description": "Kafka client configuration.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Identifier used by the Kafka client connection."
+        },
+        "brokers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "List of Kafka broker addresses."
+        },
+        "topic": {
+          "type": "string",
+          "description": "Kafka topic where messages will be published."
+        },
+        "ssl": {
+          "type": "boolean",
+          "description": "Boolean flag enabling SSL encryption."
+        },
+        "sasl": {
+          "type": "object",
+          "description": "Optional authentication block for Kafka SASL.",
+          "properties": {
+            "username": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "mechanism": {
+              "type": "string",
+              "enum": ["plain", "scram-sha-256", "scram-sha-512", "aws", "oauthbearer"],
+              "default": "plain"
+            }
+          },
+          "required": ["username", "password", "mechanism"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["clientId", "brokers", "topic", "ssl"],
+      "additionalProperties": false
+    },
+    "batchSize": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of messages sent in each batch."
+    },
+    "records": {
+      "type": "array",
+      "description": "Dataset records that will be published to Kafka.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "required": ["defaultDatasetId", "kafkaConfig", "batchSize"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "defaultDatasetId": "my-dataset-id",
+      "kafkaConfig": {
+        "clientId": "my-kafka-client",
+        "brokers": ["kafka-broker1:9092", "kafka-broker2:9092"],
+        "topic": "my-kafka-topic",
+        "ssl": true,
+        "sasl": {
+          "username": "my-username",
+          "password": "my-password",
+          "mechanism": "plain"
+        }
+      },
+      "batchSize": 5
+    }
+  ]
+}
