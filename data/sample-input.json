@@ -1,0 +1,60 @@
+{
+  "defaultDatasetId": "sample-dataset",
+  "kafkaConfig": {
+    "clientId": "sample-kafka-client",
+    "brokers": ["localhost:9092"],
+    "topic": "sample-kafka-topic",
+    "ssl": false,
+    "sasl": null
+  },
+  "batchSize": 2,
+  "records": [
+    {
+      "datasetId": "sample-dataset",
+      "id": 1,
+      "type": "user-event",
+      "event": "signup",
+      "payload": {
+        "userId": "u-1001",
+        "email": "user1@example.com",
+        "plan": "free"
+      },
+      "createdAt": "2025-01-01T10:00:00.000Z"
+    },
+    {
+      "datasetId": "sample-dataset",
+      "id": 2,
+      "type": "user-event",
+      "event": "upgrade",
+      "payload": {
+        "userId": "u-1001",
+        "fromPlan": "free",
+        "toPlan": "pro"
+      },
+      "createdAt": "2025-01-01T10:05:00.000Z"
+    },
+    {
+      "datasetId": "sample-dataset",
+      "id": 3,
+      "type": "user-event",
+      "event": "signup",
+      "payload": {
+        "userId": "u-1002",
+        "email": "user2@example.com",
+        "plan": "pro"
+      },
+      "createdAt": "2025-01-01T11:00:00.000Z"
+    },
+    {
+      "datasetId": "sample-dataset",
+      "id": 4,
+      "type": "user-event",
+      "event": "cancel",
+      "payload": {
+        "userId": "u-1001",
+        "reason": "pricing"
+      },
+      "createdAt": "2025-01-01T11:30:00.000Z"
+    }
+  ]
+}
