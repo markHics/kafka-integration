@@ -1,0 +1,22 @@
+{
+  "name": "kafka-integration-scraper",
+  "version": "1.0.0",
+  "description": "Streamlined Node.js integration to send structured, batched data into Kafka topics.",
+  "main": "src/runner.js",
+  "scripts": {
+    "start": "node src/runner.js",
+    "start:dev": "NODE_ENV=development node src/runner.js"
+  },
+  "keywords": [
+    "kafka",
+    "kafkajs",
+    "integration",
+    "batch",
+    "scraper"
+  ],
+  "author": "Bitbash",
+  "license": "MIT",
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  }
+}
